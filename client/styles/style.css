@@ -1,0 +1,68 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font: normal 15px "Lucida Sans Unicode",sans-serif;
+	color: #3D405B;
+}
+:root {
+	--color1: #F4F1DE;
+	--color2: #E07A5F;
+	--color3: #3D405B;
+	--color4: #81B29A;
+	--color5: #F2CC8F;
+}
+body {
+	background-color: #F4F1DE;
+}
+h3 {
+	margin-left: 30px;
+	font: bold 1.3em "Lucida Sans Unicode",sans-serif;
+}
+
+/*---------------------------------------*/
+.practice {
+	margin: 10px 10%;
+	border: 1px solid #3D405B;
+	border-radius: 10px;
+	padding: 10px;
+}
+.practice_description {
+	padding: 10px;
+	margin: 10px 3%;
+	border: 1px solid #3D405B;
+	border-radius: 10px;
+}
+.work_place {
+	padding: 10px;
+	margin: 10px 3%;
+	border: 1px solid #3D405B;
+	border-radius: 10px;
+}
+
+
+/*---------------------------------------*/
+
+/*---Foter---*/
+footer {
+	margin: 10px 10%;
+}
+/*---Colors---*/
+.color_bar {
+  color: #F1F6F8;
+  display: grid;
+  width: 180px;
+  padding: 10px;
+  background: #2D2F31;
+  grid-template-columns: repeat(6, 1fr);
+}
+.color_bar > div {
+  border-radius: 15px;
+  margin: 0 2px;
+  padding: 10px;
+}
+.color1 {background: var(--color1);}
+.color2 {background: var(--color2);}
+.color3 {background: var(--color3);}
+.color4 {background: var(--color4);}
+.color5 {background: var(--color5);}
