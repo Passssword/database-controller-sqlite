@@ -1,5 +1,6 @@
 const writeData = require('./source/dataController.js').writeData;
 const express = require('express')
+const path = require('path')
 const bodyParser = require('body-parser')
 const app = express()
 const cors = require('cors');
@@ -8,10 +9,13 @@ app.use( bodyParser.json() )
 app.use( cors() );
 
 app.get( "/", (request, response)=>{
-	response.json( {
-		status: 200,
-		comment: "hello world"
-	} )
+	// response.json( {
+	// 	status: 200,
+	// 	comment: "hello world"
+	// } )
+
+	response.type('.html')
+	response.sendFile(path.resolve(__dirname, 'client/index.html'))
 } )
 app.post( "/", (request, response)=>{
 	try{

@@ -4,16 +4,21 @@ const btnGet = document.querySelector('.btnGet');
 const btnPost = document.querySelector('.btnPost');
 const btnGetLocal = document.querySelector('.btnGetLocal');
 const btnPostLocal = document.querySelector('.btnPostLocal');
-const formId = document.querySelector('#formId');
-const formFullname = document.querySelector('#formFullname');
 const btnPostForm = document.querySelector('#btnPostReqest');
+const btnGetDatabase = document.querySelector('#btnGetDatabaseData');
+let table = document.querySelector('.table_field');
 const requestURLlocal = 'http://localhost:34587/pushdata';
 const requestURL = 'http://jsonplaceholder.typicode.com/users';
 
-let requestBody = {
-	id: 212145,
-	name: 'Vasya'
-}
+
+// Получение данных формы
+const formId = document.querySelector('#formId');
+const formFullname = document.querySelector('#formFullname');
+const formInventory = document.querySelector('#formInventory');
+const formSerialNumber = document.querySelector('#formSerialNumber');
+const formOfficeNumber = document.querySelector('#formOfficeNumber');
+const formComment = document.querySelector('#formComment');
+//------------------------
 
 
 function sendRequest(reqMethod, reqURL, reqBody = null) {
@@ -36,48 +41,54 @@ function sendRequest(reqMethod, reqURL, reqBody = null) {
 			resolve(xhr.response)
 		}
 		
-		if (reqMethod == 'GET') {xhr.send()}
-		if (reqMethod == 'POST') {xhr.send(JSON.stringify(reqBody))}
+		if (reqMethod === 'GET') {xhr.send()}
+		if (reqMethod === 'POST') {xhr.send(JSON.stringify(reqBody))}
 		
 
-		console.log(reqBody)
+		// console.log(reqBody)
 	})	
 }
 
 
+
 // add event button
-btnGet.addEventListener('click', () => {
-	sendRequest('GET', requestURL)
-		.then(data => console.log(data))
-		.catch(err => console.log(err))
+btnGet.addEventListener('click', async () => {
+	// sendRequest('GET', requestURL)
+	// 	.then(data => console.log(data))
+	// 	.catch(err => console.error(err))
+	const response = await fetch(requestURL)
+	const data = await response.json();
+	console.log(data)
 });
 btnPost.addEventListener('click', () => {
 	sendRequest('POST', requestURL, requestBody)
 		.then(data => console.log(data))
 		.catch(err => console.log(err))
 });
-btnGetLocal.addEventListener('click', () => {sendRequest('GET', 'http://localhost:34587/getdata')});
+btnGetLocal.addEventListener('click', () => {
+	sendRequest('GET', 'http://localhost:34587/getdata')
+		.then(data => console.log(data))
+		.catch(err => console.log(err))
+});
 btnPostLocal.addEventListener('click', () => {
 	sendRequest('POST', requestURLlocal, requestBody)
 		.then(data => console.log(data))
 		.catch(err => console.log(err))
 });
 btnPostForm.addEventListener('click', () => {
-	let idField = formId.value;
-	let nameField = formFullname.value;
 
 	let reqBody = {
-		id: idField,
-		name: nameField
+		id: formId.value,
+		name: formFullname.value,
+		serial_number: formSerialNumber.value,
+		inventory_number: formInventory.value,
+		office: formOfficeNumber.value,
+		comment: formComment.value
 	}
 
 	if ( !checkFields(reqBody) ) {
 		console.log('Не заполнены поля формы')
 	} else {
-		console.log("get data from field's")
-		console.log(idField)
-		console.log(nameField)
-
 		sendRequest('POST', requestURLlocal, reqBody)
 			.then(data => console.log(data))
 			.catch(err => console.log(err))
@@ -85,9 +96,37 @@ btnPostForm.addEventListener('click', () => {
 	
 });
 
+
+
 // проверка заполнения полей формы
 function checkFields ( body ) {
 	if (body.id == '' || body.name == '') { return false }
 		else return true
 }
 //---------------------------------
+
+function insertData (data) {
+	console.log("insert")
+	table.innerHTML = `<p>Всего элементов в массиве: ${data.length}</p>`
+	table.innerHTML += `<p>------------------------------------------------</p>`
+	return table.innerHTML += `
+		<p>ID: ${data[0].id}</p>
+		<p>Name: ${data[0].name}</p>
+		`;
+}
+
+
+// Получение данных - канал Александра Лущенко
+
+btnGetDatabase.addEventListener( 'click', async () => {
+	const response = await fetch('http://localhost:34587/getdata')
+		// .then(response => {return response.json})
+		// .then(data => console.log(data))
+	const data = await response.json();
+	console.log(data.dataArray)
+	insertData(data.dataArray)
+} )
+
+function getDataFromDatabase () {
+	fetch('http://localhost:34587/getdata').then(data => console.log(data))
+}

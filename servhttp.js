@@ -6,6 +6,8 @@ const path = require('path')
 const bodyParser = require('body-parser')
 const cors = require('cors');
 
+
+
 http.createServer( function(req, res) {
 
 	const url = req.url;
@@ -21,6 +23,7 @@ http.createServer( function(req, res) {
 		case '/getdata':
 			let temp_data = getData();
 			res.write(temp_data)
+			res.statusCode = 200;
 			res.end()
 			break;
 		case '/pushdata':
@@ -46,7 +49,6 @@ http.createServer( function(req, res) {
 			break;
 		default:
 			if ( url.includes('/images') ) {
-				console.log('img =>>>>>>>>>>>>>>>>')
 				let data = fs.readFileSync('./client'+url)
 				res.write(data)
 				res.end()

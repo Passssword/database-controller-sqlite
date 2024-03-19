@@ -40,6 +40,26 @@ h3 {
 	border-radius: 10px;
 }
 
+.grid_contener {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 5px;
+  border: 2px solid #E5D5B9;
+/*  margin: 10px 5%;*/
+  padding: 10px;
+}
+
+.grid_contener > div {
+  background-color: #E5D5B9;
+  border-radius: 10px;
+  padding: 10px;
+}
+.header {
+  grid-column: 1/2;
+}
+.content {
+  grid-column: 2/5;
+}
 
 /*---------------------------------------*/
 

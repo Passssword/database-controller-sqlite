@@ -16,10 +16,16 @@ function saveFile (data, localData) {
 
 module.exports.writeData = function (data) {
     console.log("----------------------")
-    console.log(data.id)
-    console.log(data.name)
+    console.log(`id:                ${data.id}`)
+    console.log(`Наименование:      ${data.name}`)
+    console.log(`Серийный номер:    ${data.serial_number}`)
+    console.log(`Инвентарный номер: ${data.inventory_number}`)
+    console.log(`Кабинет:           ${data.office}`)
+    console.log(`Коментарий:        ${data.comment}`)
     console.log("----------------------")
     /*---------------------------------------*/
     bufferJson = fs.readFileSync('data.json')
     saveFile(data, bufferJson)
 }
+
+module.exports.getData = function () { return fs.readFileSync( 'data.json' ) }
