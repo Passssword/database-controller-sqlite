@@ -3,7 +3,7 @@ const { open } = require('sqlite');
 
 let db;
 
-const initDb = async () => {
+module.exports.initDb = async () => {
     // open the database
     if (!db) {
         db = await open({
@@ -31,7 +31,5 @@ const initDb = async () => {
 };
 
 module.exports.getDb = () => db;
-
-module.exports.initDb = () => initDb;
 
 /*-------------------------------*/

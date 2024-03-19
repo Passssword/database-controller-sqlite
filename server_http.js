@@ -1,5 +1,7 @@
 const writeData = require('./source/dataController.js').writeData;
 const getData = require('./source/dataController.js').getData;
+const getDb = require('./source/dataAccessLayer.js').getDb;
+const initDb = require('./source/dataAccessLayer.js').initDb;
 const http = require('http')
 const fs = require('fs')
 const path = require('path')
