@@ -15,9 +15,12 @@ app.get( "/", (request, response)=>{
 	// 	comment: "hello world"
 	// } )
 
+	console.log(request)
+	
 	response.type('.html')
 	response.sendFile(path.resolve(__dirname, 'client/index.html'))
 } )
+
 app.post( "/", (request, response)=>{
 	try{
 		writeData(request.body)
@@ -35,4 +38,5 @@ app.post( "/", (request, response)=>{
 		} )
 	}
 } )
+
 app.listen(34587)
