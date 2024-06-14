@@ -6,6 +6,7 @@ const path = require('path')
 const bodyParser = require('body-parser')
 const cors = require('cors');
 
+const baseController = require('./source/dataController.js').baseController;
 
 
 http.createServer( function(req, res) {
@@ -21,8 +22,9 @@ http.createServer( function(req, res) {
 			res.end()
 			break;
 		case '/getdata':
-			let temp_data = getData();
-			res.write(temp_data)
+			// let temp_data = getData();
+			let baseData = baseController.all()
+			res.write( baseData )
 			res.statusCode = 200;
 			res.end()
 			break;
@@ -35,7 +37,10 @@ http.createServer( function(req, res) {
 				req.on( 'end', () => {
 					try{
 						let dataObj = JSON.parse(body)
-						writeData(dataObj)
+						// writeData(dataObj)
+						baseController.create(dataObj, (error) => {
+							if(error) {return console.log(error)}
+						})
 						res.write('OK')
 						return res.end()
 					}catch(err){
