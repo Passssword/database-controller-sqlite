@@ -1,4 +1,5 @@
 const writeData = require('./source/dataController.js').writeData;
+const baseManager = require('./source/dataController.js').baseManager;
 const express = require('express')
 const path = require('path')
 const bodyParser = require('body-parser')
@@ -19,6 +20,19 @@ app.get( "/", (request, response)=>{
 	
 	response.type('.html')
 	response.sendFile(path.resolve(__dirname, 'client/index.html'))
+} )
+
+app.get( "/getdata", (request, response)=>{
+	response.json( {
+		status: 200,
+		comment: "hello world"
+	} )
+
+	baseManager.getAll()
+	// console.log(request)
+	
+	// response.type('.html')
+	// response.sendFile(path.resolve(__dirname, 'client/index.html'))
 } )
 
 app.post( "/", (request, response)=>{

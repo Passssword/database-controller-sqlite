@@ -123,7 +123,7 @@ btnGetDatabase.addEventListener( 'click', async () => {
 		// .then(response => {return response.json})
 		// .then(data => console.log(data))
 	const data = await response.json();
-	console.log(data.dataArray)
+	console.log(data)
 	insertData(data.dataArray)
 } )
 

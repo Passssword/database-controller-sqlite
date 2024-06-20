@@ -67,3 +67,30 @@ class baseController {
 
 module.exports = db;
 module.exports.baseController = baseController;
+
+
+//----------------------------------------
+//---------- Base Controller 2 -----------
+//----------------------------------------
+
+const DatabasePath = path.join(__dirname, '../base.db')
+
+const baseManager = {
+    getAll: async function (req, res) {
+        // const bodyRequest = req.body;
+
+        console.log (`Database path: ${DatabasePath}`)
+
+        db.all('SELECT * FROM inventory', (error, result)=>{
+            if (error) {
+                console.log (error);
+              } else {
+                console.log (result)
+              }
+            })
+        
+    },
+    postData: async function () {return 0}
+}
+
+module.exports.baseManager = baseManager;
